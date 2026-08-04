@@ -10,12 +10,9 @@ const pool = new Pool({
 });
 
 const connectDB = async () => {
-  try {
-    await pool.connect();
-    console.log('PostgreSQL connected - dummy');
-  } catch (err) {
-    console.log('PostgreSQL connection (skipped) - dummy mode');
-  }
+  const client = await pool.connect();
+  console.log('PostgreSQL connected');
+  client.release();
 };
 
 module.exports = { pool, connectDB };
