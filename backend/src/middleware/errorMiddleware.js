@@ -1,4 +1,11 @@
 module.exports = (err, req, res, next) => {
-  console.error('Error - dummy handler:', err.message);
-  res.status(500).json({ success: false, error: 'Something went wrong - dummy' });
+  console.error('Error:', err.message);
+
+  const statusCode = err.statusCode || 500;
+  const message = err.statusCode ? err.message : 'Something went wrong';
+
+  res.status(statusCode).json({
+    success: false,
+    message
+  });
 };
