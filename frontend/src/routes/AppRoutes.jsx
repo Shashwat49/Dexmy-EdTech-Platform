@@ -4,9 +4,25 @@ import PublicLayout from '../layouts/PublicLayout';
 import StudentLayout from '../layouts/StudentLayout';
 import TeacherLayout from '../layouts/TeacherLayout';
 import AdminLayout from '../layouts/AdminLayout';
+import ClassroomLayout from '../layouts/ClassroomLayout';
 
 import ProtectedRoute from './ProtectedRoute';
 import PublicRoute from './PublicRoute';
+
+// Admin pages
+import AdminDashboard from '../pages/admin/Dashboard';
+import AdminUsers from '../pages/admin/Users';
+import AdminTeachers from '../pages/admin/Teachers';
+import AdminStudents from '../pages/admin/Students';
+import AdminCourses from '../pages/admin/Courses';
+import AdminSessions from '../pages/admin/Sessions';
+import AdminBookings from '../pages/admin/Bookings';
+import AdminPayments from '../pages/admin/Payments';
+import AdminAnalytics from '../pages/admin/Analytics';
+import AdminSettings from '../pages/admin/Settings';
+
+// Classroom
+import Classroom from '../pages/classroom/Classroom';
 
 const AppRoutes = ({ isAuthenticated, userRole }) => {
     return (
@@ -25,7 +41,6 @@ const AppRoutes = ({ isAuthenticated, userRole }) => {
                 <Route element={<StudentLayout />}>
                     <Route path="/student" element={<div>Student Dashboard</div>} />
                     <Route path="/student/courses" element={<div>Student Courses</div>} />
-                    <Route path="/classroom/:id" element={<div>Classroom</div>} />
                     <Route path="/sessions" element={<div>Sessions</div>} />
                     <Route path="/purchases" element={<div>Purchases</div>} />
                 </Route>
@@ -43,9 +58,23 @@ const AppRoutes = ({ isAuthenticated, userRole }) => {
             {/* Admin Routes */}
             <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} allowedRoles={['admin']} userRole={userRole} />}>
                 <Route element={<AdminLayout />}>
-                    <Route path="/admin" element={<div>Admin Dashboard</div>} />
-                    <Route path="/admin/users" element={<div>Admin Users</div>} />
-                    <Route path="/admin/courses" element={<div>Admin Courses</div>} />
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin/users" element={<AdminUsers />} />
+                    <Route path="/admin/teachers" element={<AdminTeachers />} />
+                    <Route path="/admin/students" element={<AdminStudents />} />
+                    <Route path="/admin/courses" element={<AdminCourses />} />
+                    <Route path="/admin/sessions" element={<AdminSessions />} />
+                    <Route path="/admin/bookings" element={<AdminBookings />} />
+                    <Route path="/admin/payments" element={<AdminPayments />} />
+                    <Route path="/admin/analytics" element={<AdminAnalytics />} />
+                    <Route path="/admin/settings" element={<AdminSettings />} />
+                </Route>
+            </Route>
+
+            {/* Classroom (role-agnostic protected) */}
+            <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} allowedRoles={['student', 'teacher', 'admin']} userRole={userRole} />}>
+                <Route element={<ClassroomLayout />}>
+                    <Route path="/classroom/:id" element={<Classroom />} />
                 </Route>
             </Route>
 

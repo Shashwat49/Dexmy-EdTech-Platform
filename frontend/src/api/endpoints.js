@@ -14,6 +14,7 @@ const ENDPOINTS = {
     USERS: {
         BASE: '/users',
         BY_ID: (id) => `/users/${id}`,
+        BY_ROLE: (role) => `/users?role=${role}`,
     },
 
     // Students
@@ -38,6 +39,7 @@ const ENDPOINTS = {
     COURSES: {
         BASE: '/courses',
         BY_ID: (id) => `/courses/${id}`,
+        PUBLISH: (id) => `/courses/${id}/publish`,
     },
 
     // Sessions
@@ -46,12 +48,14 @@ const ENDPOINTS = {
         BY_ID: (id) => `/sessions/${id}`,
         BOOK: '/sessions/book',
         UPCOMING: '/sessions/upcoming',
+        CANCEL: (id) => `/sessions/${id}/cancel`,
     },
 
     // Bookings
     BOOKINGS: {
         BASE: '/bookings',
         BY_ID: (id) => `/bookings/${id}`,
+        CANCEL: (id) => `/bookings/${id}/cancel`,
     },
 
     // Payments
@@ -59,18 +63,30 @@ const ENDPOINTS = {
         BASE: '/payments',
         HISTORY: '/payments/history',
         INVOICE: (id) => `/payments/${id}/invoice`,
+        REFUND: (id) => `/payments/${id}/refund`,
     },
 
     // Classroom
     CLASSROOM: {
         JOIN: (id) => `/classroom/${id}/join`,
         LEAVE: (id) => `/classroom/${id}/leave`,
+        MESSAGES: (id) => `/classroom/${id}/messages`,
+        PARTICIPANTS: (id) => `/classroom/${id}/participants`,
     },
 
     // Admin
     ADMIN: {
         ANALYTICS: '/admin/analytics',
         REPORTS: '/admin/reports',
+        USERS: '/admin/users',
+        USER_BY_ID: (id) => `/admin/users/${id}`,
+        TEACHERS: '/admin/teachers',
+        TEACHER_BY_ID: (id) => `/admin/teachers/${id}`,
+        STUDENTS: '/admin/students',
+        STUDENT_BY_ID: (id) => `/admin/students/${id}`,
+        SESSIONS: '/admin/sessions',
+        SESSION_BY_ID: (id) => `/admin/sessions/${id}`,
+        SETTINGS: '/admin/settings',
     },
 };
 
